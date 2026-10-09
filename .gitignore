@@ -1,0 +1,18 @@
+__pycache__/
+.idea
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+.venv/
+
+# secrets
+.env
+
+# downloaded datasets, embedding caches, model checkpoints - not committed
+data/
+.cache/
+*.parquet
+*.jsonl.xz
