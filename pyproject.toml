@@ -30,7 +30,7 @@ wrap-descriptions = 88
 pre-summary-newline = true
 
 [tool.uv]
-# requirements.txt pulls torch from the PyTorch cu126 index, which also mirrors
+# requirements-cu126.txt pulls torch from the PyTorch cu126 index, which also mirrors
 # common packages (tqdm, numpy, ...) at older versions - let uv pick the pinned
 # version from whichever index has it instead of stopping at the first match.
 index-strategy = "unsafe-best-match"

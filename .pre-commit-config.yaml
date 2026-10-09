@@ -47,7 +47,7 @@ repos:
           - nltk==3.9.1
           - huggingface_hub==1.25.1
           - transformers==5.14.1
-          - datasets
+          - datasets==5.0.1
   # Every public function/method needs a reST docstring with a :param: per
   # parameter and a :returns: - will read [tool.docsig] once pyproject.toml
   # exists (Tier 0); runs on defaults until then. Tests are exempt (pytest

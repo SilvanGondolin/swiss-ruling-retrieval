@@ -1,0 +1,6 @@
+# For old (Pascal-era, e.g. GTX 1060) CUDA GPUs: the default CUDA 13 torch wheels
+# dropped their architecture (sm_61). The PyTorch cu126 index serves a
+# 2.14.0+cu126 build, which pip prefers over the plain 2.14.0 pinned below.
+--extra-index-url https://download.pytorch.org/whl/cu126
+
+-r requirements.txt

@@ -4,18 +4,28 @@ Multilingual (DE/FR/IT) Swiss legal retrieval: given a Federal Supreme
 Court case, retrieve the rulings (and law articles) it cites. See
 "Results" below for measured results.
 
+## Quick start
+
+```bash
+pip install -r requirements.txt                      # Python >= 3.11
+python3 -m scripts.inspect_data --split=validation   # downloads ~35 MB, prints stats
+python3 -m scripts.evaluate --train-cases 5000 --val-queries 500 --restrict-corpus
+```
+
+The last command is the fast dev-subset evaluation (BM25, chunked BM25, dense,
+constant baseline); it runs on CPU. Measured numbers are under "Results", and
+fine-tuning is under "Fine-tuning". Run the tests with `python3 -m pytest`.
+
 ## Setup
 
-`pip install -r requirements.txt` works as-is only on a machine with an
-old (Pascal-era, e.g. GTX 1060) CUDA GPU: the `torch` pin targets PyTorch's
-CUDA 12.6 build specifically because newer default wheels dropped that
-GPU's architecture. On any other
-machine - CPU-only, or a newer GPU - remove the `--extra-index-url` line
-and the `+cu126` suffix on the `torch` pin first, so pip picks whatever
-build actually matches your platform (see
-[pytorch.org/get-started](https://pytorch.org/get-started/locally/) for
-the right command for your platform). Retrieval/evaluation (not
-fine-tuning) runs fine on CPU.
+`pip install -r requirements.txt` installs everything with a platform-neutral
+`torch` pin, so pip picks the build for your machine (CPU or a recent GPU; see
+[pytorch.org/get-started](https://pytorch.org/get-started/locally/) if you need a
+specific one). Retrieval/evaluation (not fine-tuning) runs fine on CPU.
+
+For an old (Pascal-era, e.g. GTX 1060) CUDA GPU, install
+`requirements-cu126.txt` instead: newer default torch wheels dropped that GPU's
+architecture, so it pulls PyTorch's CUDA 12.6 build.
 
 ## Getting the data
 
@@ -289,6 +299,11 @@ the constant baseline at Recall@10.
 - Larger fine-tuning runs (all 31,356 pairs, more epochs), dropping weakly matched pairs
   (`--min-bm25-score`), and BM25 hard negatives. The fine-tuned model has not been
   evaluated on the full split or with the full corpus.
+
+## Citing
+
+If you use this code, cite it via `CITATION.cff` (GitHub's "Cite this repository"
+button), and cite the dataset paper listed under "License" below.
 
 ## License
 

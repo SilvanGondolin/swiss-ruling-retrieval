@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below, and cite the SCALE paper for the data."
+title: "swiss-ruling-retrieval"
+abstract: "Multilingual (DE/FR/IT) Swiss legal retrieval: baselines, evaluation, and contrastive fine-tuning."
+type: software
+license: GPL-3.0-or-later
+version: 0.1.0
+authors:
+  - alias: SilvanGondolin
+repository-code: "https://github.com/SilvanGondolin/swiss-ruling-retrieval"
+references:
+  - type: article
+    title: "SCALE: Scaling up the Complexity for Advanced Language Model Evaluation"
+    authors:
+      - family-names: Rasiah
+        given-names: Vishvaksenan
+      - family-names: Stern
+        given-names: Ronja
+      - family-names: Matoshi
+        given-names: Veton
+      - family-names: Stürmer
+        given-names: Matthias
+      - family-names: Chalkidis
+        given-names: Ilias
+      - family-names: Ho
+        given-names: Daniel E.
+      - family-names: Niklaus
+        given-names: Joel
+    year: 2023
+    url: "https://arxiv.org/abs/2306.09237"
