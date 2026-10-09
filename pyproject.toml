@@ -1,0 +1,36 @@
+[project]
+name = "swiss-ruling-retrieval"
+version = "0.1.0"
+description = "Multilingual (DE/FR/IT) Swiss legal retrieval: baselines, evaluation, and contrastive fine-tuning."
+requires-python = ">=3.11"
+license = "GPL-3.0-or-later"
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+# flake8-boolean-trap (FBT): flags positional boolean args at call sites,
+# including third-party calls we don't control the signature of - the one
+# part of "always use named arguments" a linter can actually enforce well.
+extend-select = ["FBT"]
+
+[tool.pytest.ini_options]
+# no fixed testpaths: tests live inside the package they test (e.g.
+# lib/tests/), not in one top-level tests/ dir - default discovery finds
+# them all from the repo root.
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+
+[tool.docformatter]
+wrap-summaries = 88
+wrap-descriptions = 88
+pre-summary-newline = true
+
+[tool.uv]
+# requirements-cu126.txt pulls torch from the PyTorch cu126 index, which also mirrors
+# common packages (tqdm, numpy, ...) at older versions - let uv pick the pinned
+# version from whichever index has it instead of stopping at the first match.
+index-strategy = "unsafe-best-match"

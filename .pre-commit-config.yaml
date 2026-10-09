@@ -1,0 +1,59 @@
+repos:
+  - repo: https://github.com/PyCQA/autoflake
+    rev: v2.3.3
+    hooks:
+      - id: autoflake
+        args: [--remove-all-unused-imports, --in-place]
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: [--profile=black]
+  # Docstring layout - will read [tool.docformatter] once pyproject.toml
+  # exists (Tier 0); runs on defaults until then. Runs before black so
+  # black sees the final text. What a docstring must contain is docsig's
+  # job (below), not this hook's.
+  - repo: https://github.com/PyCQA/docformatter
+    rev: v1.7.8
+    hooks:
+      - id: docformatter
+        additional_dependencies: [tomli]
+        args: [--in-place, --config, pyproject.toml]
+  - repo: https://github.com/psf/black
+    rev: 25.1.0
+    hooks:
+      - id: black
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.22
+    hooks:
+      - id: ruff
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v2.3.0
+    hooks:
+      - id: mypy
+        # ignore_missing_imports (pyproject.toml) means an unresolvable
+        # third-party import silently becomes Any - without these installed
+        # here, mypy can't see real stubs (e.g. sentence-transformers'
+        # encode() overloads) and misses real type errors across the
+        # boundary. Keep these versions in sync with the active environment.
+        additional_dependencies:
+          - numpy==2.3.4
+          - sentence-transformers==5.6.1
+          - torch==2.14.0
+          - dacite==1.9.1
+          - cyclopts==4.25.3
+          - bm25s==0.3.11
+          - tqdm==4.67.1
+          - nltk==3.9.1
+          - huggingface_hub==1.25.1
+          - transformers==5.14.1
+          - datasets==5.0.1
+  # Every public function/method needs a reST docstring with a :param: per
+  # parameter and a :returns: - will read [tool.docsig] once pyproject.toml
+  # exists (Tier 0); runs on defaults until then. Tests are exempt (pytest
+  # finds them by name; a docstring on each adds nothing).
+  - repo: https://github.com/jshwi/docsig
+    rev: v0.96.0
+    hooks:
+      - id: docsig
+        exclude: (^|/)(tests/|conftest\.py$)
